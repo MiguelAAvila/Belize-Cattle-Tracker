@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import "../styles/generateReport.css"
 import NavBar from "./NavBar/navBar";
 import Box from "@mui/material/Box";
 import React, { useState, useEffect } from "react";
@@ -9,23 +8,8 @@ import Paper from "@mui/material/Paper";
 import Zoom from "react-reveal/Zoom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import LoginForm from "./components/LoginForm/index";
-import {db} from './firebase-config';
-import {collection, getDocs} from "firebase/firestore";
 
 function MyApp({ Component, pageProps }) {
-  const [user_info, setUsers] = useState([]);
-  const userCollectionRef = collection(db, "user_info")
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      const userinfo = await getDocs(userCollectionRef);
-      setUsers(userinfo.docs.map((doc) => ({...doc.data(), id: doc.id})));
-      console.log(userinfo);
-    };
-    getUserInfo();
-  }, []);
-
   const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
@@ -33,16 +17,11 @@ function MyApp({ Component, pageProps }) {
     // color: theme.palette.text.secondary,
   }));
 
-  const [isAuth, setIsAuth] = useState(false);
-
-
   const [background, setBackground] = useState(
     "https://c1.wallpaperflare.com/preview/440/781/267/agriculture-blur-close-up-countryside.jpg"
   );
-
-  const authorize = () => {
-    setIsAuth(true);
-  };
+  const [isBackgroundChanged, setIsBackgroundChanged] = useState(true);
+  const [pageHeading, setPageHeading] = useState("ADVENTURE IS WORTHWHILE");
 
   //breakpoints
   const mediaQuery = useMediaQuery(useTheme().breakpoints.down("785"));
@@ -62,9 +41,16 @@ function MyApp({ Component, pageProps }) {
     color: "white",
   }));
 
+  //large nav bar transition
+  const largeNav = useSpring({
+    to: isBackgroundChanged ? { opacity: 1 } : { opacity: 0 },
+    from: isBackgroundChanged ? { opacity: 0 } : { opacity: 1 },
+  });
+
   return (
     <>
-    {isAuth ? ( <animated.div>
+      {isBackgroundChanged && (
+        <animated.div style={largeNav}>
           <Box
             sx={{
               width: "auto",
@@ -78,8 +64,13 @@ function MyApp({ Component, pageProps }) {
               backgroundImage: `url(${background}) `,
             }}
           >
-            <NavBar />
-            
+            <NavBar
+              setBackground={setBackground}
+              background={background}
+              setIsBackgroundChanged={setIsBackgroundChanged}
+              setPageHeading={setPageHeading}
+            />
+
             <HeadingItem>
               <Zoom bottom cascade>
                 <span>
@@ -106,7 +97,8 @@ function MyApp({ Component, pageProps }) {
             </HeadingItem>
           </Box>
           <Component {...pageProps} />
-        </animated.div> ): <LoginForm isAuth={isAuth} authorize={authorize}/>}
+        </animated.div>
+      )}
     </>
   );
 }

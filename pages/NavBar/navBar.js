@@ -17,12 +17,11 @@ const link = [
   { href: "/MainPages/AboutUs ", Name: "About Us" },
   { href: "/MainPages/ScanQR", Name: "ScanQR" },
   { href: "/MainPages/ContactUs", Name: "Contact Us" },
-  { href: "/MainPages/GenerateReport", Name:"Generate Report"}
 ];
 
 const Admin = [{ href: "/Admin/AdminHome", Name: "Admin" }];
 
-const navBar = () => {
+const navBar = ({ setIsBackgroundChanged }) => {
   const [isBurgerNav, setIsBurgerNav] = useState(false); //to display hamburger menu icon
   const [isShowNav, setIsShowNav] = useState(false); //to display nav bar when less than 600px
 
@@ -102,12 +101,18 @@ const navBar = () => {
     setIsShowNav((prevState) => !prevState);
   };
 
+  const handleNavBar = (index) => {
+    setIsBackgroundChanged(false); //hide background change button
+    const timer = setTimeout(() => setIsBackgroundChanged(true), 200); //show background again after 200 milliseconds
+    return () => clearTimeout(timer); //clear timeout
+  };
+
   //displays navigation bar
   const Links = ({ linkName, linkRef, index }) => {
     return (
       <>
         <Typography component="div">
-          <Item className={navStyle.line} >
+          <Item className={navStyle.line} onClick={() => handleNavBar(index)}>
             <Link item xs={2} href={linkRef}>
               {linkName}
             </Link>
