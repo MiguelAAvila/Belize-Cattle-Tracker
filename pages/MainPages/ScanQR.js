@@ -28,17 +28,18 @@ const ScanQR = () => {
         <Grid item xs={10}>
           <Item sx={{ fontSize: "30px", fontWeight: "bold" }}>Scan QR</Item>
           <Item sx={{ fontSize: "15px" }}>Scanning page</Item>
+          ReactDOM.render(
+  <React.StrictMode>
+    <App text = 
+    "antbio_type: tetracycline. birth_date: 01/12/2020 breed: Hereford cattle_id : 340 cattle_weight : 134lbs dna_type: Roman Briton, welsh combination farmer: Bob Smith gender: male location: Spanish Lookout rearing_type: free roaming repro_stat: none und_hlth_issues: bovine mastitis"
+    />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
         </Grid>
       </Grid>
 
-      {/* ReactDOM.render( */}
-  <React.StrictMode>
-    <App text = 
-    "My Name is Desire Amagwula \n I like to go to school"
-    />
-  </React.StrictMode>,
-  {/* document.getElementById('root') */}
-{/* ); */}
+      
 
 
     </>
