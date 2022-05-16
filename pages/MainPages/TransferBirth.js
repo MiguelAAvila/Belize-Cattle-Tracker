@@ -89,9 +89,9 @@ function transferBirth() {
             updateDoc(washingtonRef, {
                 trans_stat: cattleInfo[0].trans_stat
             }).then(() => {
-                alert('Updated Cattle successfully');
+                console.log('Updated Cattle successfully');
         }).catch((err) => {
-            alert("Failed", err)});
+            console.log("Failed", err)});
     }
 
     return (
