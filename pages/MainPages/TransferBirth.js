@@ -119,7 +119,6 @@ function transferBirth() {
                         </Grid><br></br><br></br>
                         <Grid align="center">
                             <Button color='primary' variant='contained' style={btnStyle} onClick={handleClickOpen}>Transfer to Slaughter Stage</Button>
-                               <Button color='primary' variant='contained' style={btnStyle}  onClick={update} autoFocus>test</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
@@ -137,7 +136,7 @@ function transferBirth() {
                                 <DialogActions>
                                     <Button onClick={handleClose}>No</Button>
                                     <Link href="/MainPages/ConfirmationDialog">
-                                        <Button onClick={handleConfirm} autoFocus onClick={update}>Yes</Button>
+                                        <Button onClick={() => { handleConfirm(); update(); }} autoFocus>Yes</Button>
                                     </Link>
                                 </DialogActions>
                             </Dialog>

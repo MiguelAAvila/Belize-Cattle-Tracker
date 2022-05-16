@@ -88,9 +88,9 @@ function transferSlaughter() {
             updateDoc(washingtonRef, {
                 trans_stat: cattleInfo[0].trans_stat
             }).then(() => {
-                alert('Updated Cattle successfully');
+                console.log('Updated Cattle successfully');
         }).catch((err) => {
-            alert("Failed", err)});
+            console.log("Failed", err)});
     }
 
     return (
@@ -130,7 +130,7 @@ function transferSlaughter() {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose}>No</Button>
-                                    <Button onClick={handleConfirm} autoFocus onClick={update}>Yes</Button>
+                                    <Button onClick={() => { handleConfirm(); update(); }} autoFocus>Yes</Button>
                                 </DialogActions>
                             </Dialog>
                         </Grid>
