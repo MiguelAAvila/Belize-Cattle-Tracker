@@ -137,7 +137,7 @@ function transferBirth() {
                                 <DialogActions>
                                     <Button onClick={handleClose}>No</Button>
                                     <Link href="/MainPages/ConfirmationDialog">
-                                        <Button onClick={handleConfirm} autoFocus>Yes</Button>
+                                        <Button onClick={handleConfirm} autoFocus onClick={update}>Yes</Button>
                                     </Link>
                                 </DialogActions>
                             </Dialog>
