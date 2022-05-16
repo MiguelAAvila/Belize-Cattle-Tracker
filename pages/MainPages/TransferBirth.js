@@ -89,9 +89,9 @@ function transferBirth() {
             updateDoc(washingtonRef, {
                 trans_stat: cattleInfo[0].trans_stat
             }).then(() => {
-                alert('Updated Cattle successfully');
+                console.log('Updated Cattle successfully');
         }).catch((err) => {
-            alert("Failed", err)});
+            console.log("Failed", err)});
     }
 
     return (
@@ -119,7 +119,6 @@ function transferBirth() {
                         </Grid><br></br><br></br>
                         <Grid align="center">
                             <Button color='primary' variant='contained' style={btnStyle} onClick={handleClickOpen}>Transfer to Slaughter Stage</Button>
-                               <Button color='primary' variant='contained' style={btnStyle}  onClick={update} autoFocus>test</Button>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
@@ -137,7 +136,7 @@ function transferBirth() {
                                 <DialogActions>
                                     <Button onClick={handleClose}>No</Button>
                                     <Link href="/MainPages/ConfirmationDialog">
-                                        <Button onClick={handleConfirm} autoFocus>Yes</Button>
+                                        <Button onClick={() => { handleConfirm(); update(); }} autoFocus>Yes</Button>
                                     </Link>
                                 </DialogActions>
                             </Dialog>
